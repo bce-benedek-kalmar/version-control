@@ -31,9 +31,7 @@ namespace UserMaintenance
         {
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.labelLastName = new System.Windows.Forms.Label();
-            this.labelFirstName = new System.Windows.Forms.Label();
+            this.labelFullName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -52,32 +50,15 @@ namespace UserMaintenance
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // textBox2
+            // labelFullName
             // 
-            this.textBox2.Location = new System.Drawing.Point(339, 39);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(148, 20);
-            this.textBox2.TabIndex = 2;
-            // 
-            // labelLastName
-            // 
-            this.labelLastName.AutoSize = true;
-            this.labelLastName.Location = new System.Drawing.Point(268, 16);
-            this.labelLastName.Name = "labelLastName";
-            this.labelLastName.Size = new System.Drawing.Size(80, 13);
-            this.labelLastName.TabIndex = 3;
-            this.labelLastName.Text = "label1.0000000";
-            this.labelLastName.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelFirstName
-            // 
-            this.labelFirstName.AutoSize = true;
-            this.labelFirstName.Location = new System.Drawing.Point(268, 42);
-            this.labelFirstName.Name = "labelFirstName";
-            this.labelFirstName.Size = new System.Drawing.Size(35, 13);
-            this.labelFirstName.TabIndex = 4;
-            this.labelFirstName.Text = "label2";
-            this.labelFirstName.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelFullName.AutoSize = true;
+            this.labelFullName.Location = new System.Drawing.Point(268, 16);
+            this.labelFullName.Name = "labelFullName";
+            this.labelFullName.Size = new System.Drawing.Size(80, 13);
+            this.labelFullName.TabIndex = 3;
+            this.labelFullName.Text = "label1.0000000";
+            this.labelFullName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnAdd
             // 
@@ -95,9 +76,7 @@ namespace UserMaintenance
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 273);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.labelFirstName);
-            this.Controls.Add(this.labelLastName);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.labelFullName);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
@@ -111,9 +90,7 @@ namespace UserMaintenance
 
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label labelLastName;
-        private System.Windows.Forms.Label labelFirstName;
+        private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Button btnAdd;
     }
 }
