@@ -62,20 +62,22 @@ namespace UserMaintenance
             // labelLastName
             // 
             this.labelLastName.AutoSize = true;
-            this.labelLastName.Location = new System.Drawing.Point(298, 16);
+            this.labelLastName.Location = new System.Drawing.Point(268, 16);
             this.labelLastName.Name = "labelLastName";
-            this.labelLastName.Size = new System.Drawing.Size(35, 13);
+            this.labelLastName.Size = new System.Drawing.Size(80, 13);
             this.labelLastName.TabIndex = 3;
-            this.labelLastName.Text = "label1";
+            this.labelLastName.Text = "label1.0000000";
+            this.labelLastName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // labelFirstName
             // 
             this.labelFirstName.AutoSize = true;
-            this.labelFirstName.Location = new System.Drawing.Point(298, 42);
+            this.labelFirstName.Location = new System.Drawing.Point(268, 42);
             this.labelFirstName.Name = "labelFirstName";
             this.labelFirstName.Size = new System.Drawing.Size(35, 13);
             this.labelFirstName.TabIndex = 4;
             this.labelFirstName.Text = "label2";
+            this.labelFirstName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnAdd
             // 
@@ -85,6 +87,7 @@ namespace UserMaintenance
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "button1";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // Form1
             // 
