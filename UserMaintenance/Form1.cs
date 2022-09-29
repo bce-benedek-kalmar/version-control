@@ -19,6 +19,7 @@ namespace UserMaintenance
             InitializeComponent();
             labelFullName.Text = Resource1.FullName;
             btnAdd.Text = Resource1.Add;
+            btnRemove.Text = Resource1.Remove;
             btnSave.Text = Resource1.Save;
 
             //listbox1
@@ -54,6 +55,11 @@ namespace UserMaintenance
                     }
                 }
             }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            users.Remove((User)listBox1.SelectedItem);
         }
     }
 }

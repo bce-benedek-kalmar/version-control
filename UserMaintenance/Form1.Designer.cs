@@ -34,6 +34,7 @@ namespace UserMaintenance
             this.labelFullName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -56,9 +57,9 @@ namespace UserMaintenance
             this.labelFullName.AutoSize = true;
             this.labelFullName.Location = new System.Drawing.Point(268, 16);
             this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(80, 13);
+            this.labelFullName.Size = new System.Drawing.Size(50, 13);
             this.labelFullName.TabIndex = 3;
-            this.labelFullName.Text = "label1.0000000";
+            this.labelFullName.Text = "label1.00";
             this.labelFullName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnAdd
@@ -67,7 +68,6 @@ namespace UserMaintenance
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(186, 23);
             this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "button1";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -77,15 +77,24 @@ namespace UserMaintenance
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(122, 23);
             this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "button1";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(301, 95);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(186, 23);
+            this.btnRemove.TabIndex = 7;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 273);
+            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.labelFullName);
@@ -105,6 +114,7 @@ namespace UserMaintenance
         private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
 
