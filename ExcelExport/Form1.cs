@@ -15,6 +15,16 @@ namespace ExcelExport
         public Form1()
         {
             InitializeComponent();
+            LoadData();
         }
+
+        List<Flat> flats;
+        RealEstateEntities context = new RealEstateEntities();
+
+        private void LoadData()
+        {
+            flats = context.Flats.ToList();
+        }
+
     }
 }
