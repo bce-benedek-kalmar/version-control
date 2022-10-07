@@ -104,13 +104,36 @@ namespace ExcelExport
             }
 
             xlSheet.get_Range(
-            GetCell(2, 1),
-            GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+                GetCell(2, 1),
+                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
 
             for (int i = 0; i < values.GetLength(0); i++)
             {
-                xlSheet.Cells[i + 1, 9] = string.Format("={0}/{1}", GetCell(i+2, 8), GetCell(i+2, 7));
+                xlSheet.Cells[i + 2, 9] = string.Format("={0}*1000000/{1}", GetCell(i+2, 8), GetCell(i+2, 7));
             }
+
+            //Formázás
+
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range tableRange = xlSheet.get_Range(GetCell(1, 1),
+                                                        GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            tableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range firstColRange = xlSheet.get_Range(GetCell(2,1),GetCell(values.GetLength(0) + 1, 1));
+            firstColRange.Font.Bold = true;
+            firstColRange.Interior.Color = Color.LightGoldenrodYellow;
+
+            Excel.Range lastColRange = xlSheet.get_Range(GetCell(2, 9), GetCell(values.GetLength(0) + 1, 9));
+            lastColRange.Interior.Color = Color.LightGreen;
+            lastColRange.NumberFormat = "#,##0.00";
         }
 
         private string GetCell(int x, int y)
