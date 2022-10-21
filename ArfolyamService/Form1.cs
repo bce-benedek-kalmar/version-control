@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArfolyamService.MnbServiceReference;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,22 @@ namespace ArfolyamService
         public Form1()
         {
             InitializeComponent();
+            CallMnb();
+        }
+
+        void CallMnb()
+        {
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-03"
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+            var result = response.GetExchangeRatesResult;
+            MessageBox.Show(result);
         }
     }
 }
