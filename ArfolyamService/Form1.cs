@@ -1,4 +1,5 @@
-﻿using ArfolyamService.MnbServiceReference;
+﻿using ArfolyamService.Entities;
+using ArfolyamService.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace ArfolyamService
         public Form1()
         {
             InitializeComponent();
+            dataGridView1.DataSource = Rates;
             CallMnb();
         }
 
@@ -33,5 +35,7 @@ namespace ArfolyamService
             var result = response.GetExchangeRatesResult;
             MessageBox.Show(result);
         }
+
+        BindingList<RateData> Rates = new BindingList<RateData>();
     }
 }
