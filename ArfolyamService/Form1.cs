@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 
 namespace ArfolyamService
@@ -19,8 +20,10 @@ namespace ArfolyamService
         {
             InitializeComponent();
             dataGridView1.DataSource = Rates;
+            chartRateData.DataSource = Rates;
             string mnbresult = CallMnb();
             ProcessXml(mnbresult);
+            DrawChart();
         }
 
         string CallMnb()
@@ -66,13 +69,29 @@ namespace ArfolyamService
                 
                 RateData rd = new RateData()
                 {
-                    Date = DateTime.Parse(elem.GetAttribute("Date")),
+                    Date = DateTime.Parse(elem.GetAttribute("date")),
                     Currency = gyerek.GetAttribute("curr"),
                     Value = excRate
                 };
 
                 Rates.Add(rd);
             }
+        }
+
+        void DrawChart()
+        {
+            var serie = chartRateData.Series[0];
+            serie.ChartType = SeriesChartType.Line;
+            serie.XValueMember = "Date";
+            serie.YValueMembers = "Value";
+            serie.BorderWidth = 2;
+
+            var area = chartRateData.ChartAreas[0];
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
+            area.AxisY.IsStartedFromZero = false;
+
+            chartRateData.Legends[0].Enabled = false;
         }
     }
 }
