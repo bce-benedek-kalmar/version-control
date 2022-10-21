@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7DE467C0-0E47-40AE-838D-30FC2CB40746}</ProjectGuid>
+    <ProjectGuid>{DBD9C14E-DCF1-498A-86A1-9CD33EE83CC3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ArfolyamService</RootNamespace>
     <AssemblyName>ArfolyamService</AssemblyName>
