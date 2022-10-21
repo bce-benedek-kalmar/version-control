@@ -19,15 +19,36 @@ namespace ArfolyamService
         public Form1()
         {
             InitializeComponent();
+
+            LoadCurrencies();
             RefreshData();
+            dataGridView1.DataSource = Rates;
+            chartRateData.DataSource = Rates;
+            comboBox1.DataSource = Currencies;
+        }
+
+        void LoadCurrencies()
+        {
+            MNBArfolyamServiceSoapClient mnb = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody req = new GetCurrenciesRequestBody();
+            var response = mnb.GetCurrencies(req);
+            var result = response.GetCurrenciesResult;
+            //MessageBox.Show(result);
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement elem in (XmlElement)xml.DocumentElement.ChildNodes[0])
+            {
+                string curr = elem.InnerText;
+                Currencies.Add(curr);
+            }
         }
 
         void RefreshData()
         {
             Rates.Clear();
 
-            dataGridView1.DataSource = Rates;
-            chartRateData.DataSource = Rates;
             string mnbresult = CallMnb();
             ProcessXml(mnbresult);
             DrawChart();
@@ -50,6 +71,7 @@ namespace ArfolyamService
         }
 
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
 
         void ProcessXml(string result_in)
         {
@@ -59,6 +81,7 @@ namespace ArfolyamService
             foreach (XmlElement elem in xml.DocumentElement)
             {
                 XmlElement gyerek = (XmlElement)elem.ChildNodes[0];
+                if (gyerek == null) continue;
                 int unit;
                 decimal val;
                 decimal excRate;
