@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace ArfolyamService
 {
@@ -18,10 +19,11 @@ namespace ArfolyamService
         {
             InitializeComponent();
             dataGridView1.DataSource = Rates;
-            CallMnb();
+            string mnbresult = CallMnb();
+            ProcessXml(mnbresult);
         }
 
-        void CallMnb()
+        string CallMnb()
         {
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody()
@@ -34,8 +36,43 @@ namespace ArfolyamService
             var response = mnbService.GetExchangeRates(request);
             var result = response.GetExchangeRatesResult;
             MessageBox.Show(result);
+            return result;
         }
 
         BindingList<RateData> Rates = new BindingList<RateData>();
+
+        void ProcessXml(string result_in)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result_in);
+
+            foreach (XmlElement elem in xml.DocumentElement)
+            {
+                XmlElement gyerek = (XmlElement)elem.ChildNodes[0];
+                int unit;
+                decimal val;
+                decimal excRate;
+                int.TryParse(gyerek.GetAttribute("unit"), out unit);
+                decimal.TryParse(gyerek.InnerText, out val);
+                switch (unit)
+                {
+                    case 0:
+                        excRate = 0;
+                        break;
+                    default:
+                        excRate = val / unit;
+                        break;
+                }
+                
+                RateData rd = new RateData()
+                {
+                    Date = DateTime.Parse(elem.GetAttribute("Date")),
+                    Currency = gyerek.GetAttribute("curr"),
+                    Value = excRate
+                };
+
+                Rates.Add(rd);
+            }
+        }
     }
 }
