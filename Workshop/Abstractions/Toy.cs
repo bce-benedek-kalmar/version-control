@@ -26,7 +26,7 @@ namespace Workshop.Abstractions
 
         protected abstract void DrawImage(Graphics graphics);
 
-        public virtual void MoveBall()
+        public virtual void MoveToy()
         {
             Left += 1;
         }

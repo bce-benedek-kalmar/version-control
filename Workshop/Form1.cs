@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Workshop.Abstractions;
 using Workshop.Entities;
 
 namespace Workshop
@@ -20,11 +21,11 @@ namespace Workshop
             Factory = new BallFactory();
         }
 
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
 
-        private BallFactory _factory;
+        private IToyFactory _factory;
 
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -32,31 +33,31 @@ namespace Workshop
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            Ball b = Factory.CreateNew();
-            _balls.Add(b);
-            mainPanel.Controls.Add(b);
-            b.Left = -b.Width;
+            Toy t = Factory.CreateNew();
+            _toys.Add(t);
+            mainPanel.Controls.Add(t);
+            t.Left = -t.Width;
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
-            var rightestBallPosition = 0;
+            var rightestToyPosition = 0;
 
-            foreach (var ball in _balls)
+            foreach (var toy in _toys)
             {
-                ball.MoveBall();
+                toy.MoveToy();
 
-                if (ball.Left>rightestBallPosition)
+                if (toy.Left>rightestToyPosition)
                 {
-                    rightestBallPosition = ball.Left;
+                    rightestToyPosition = toy.Left;
                 }
             }
 
-            if (rightestBallPosition>=1000)
+            if (rightestToyPosition>=1000)
             {
-                var outBall = _balls[0];
-                _balls.Remove(outBall);
-                mainPanel.Controls.Remove(outBall);
+                var outToy = _toys[0];
+                _toys.Remove(outToy);
+                mainPanel.Controls.Remove(outToy);
             }
         }
     }
