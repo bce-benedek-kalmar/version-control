@@ -31,6 +31,7 @@ namespace VaR
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.b_Sav = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -48,14 +49,26 @@ namespace VaR
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(13, 208);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(616, 185);
+            this.dataGridView2.Size = new System.Drawing.Size(304, 185);
             this.dataGridView2.TabIndex = 1;
+            // 
+            // b_Sav
+            // 
+            this.b_Sav.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_Sav.Location = new System.Drawing.Point(554, 370);
+            this.b_Sav.Name = "b_Sav";
+            this.b_Sav.Size = new System.Drawing.Size(75, 23);
+            this.b_Sav.TabIndex = 2;
+            this.b_Sav.Text = "Mentés";
+            this.b_Sav.UseVisualStyleBackColor = true;
+            this.b_Sav.Click += new System.EventHandler(this.b_Sav_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 405);
+            this.Controls.Add(this.b_Sav);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -70,6 +83,7 @@ namespace VaR
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button b_Sav;
     }
 }
 
