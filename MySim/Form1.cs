@@ -28,23 +28,63 @@ namespace MySim
             BirthProbabilities = loadBirthPs(@"C:\Temp\születés.csv");
             DeathProbabilities = loadDeathPs(@"C:\Temp\halál.csv");
 
-            dataGridView1.DataSource = Population;
+            
+        }
 
-            for (int y = 2005; y < 2024; y++)
+        private void Simulation(decimal endYear)
+        {
+            for (int y = 2005; y < endYear; y++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-
+                    SimStep(y, Population[i]);
                 }
 
                 int numMales = (from x in Population
                                 where x.Gender == Gender.Male && x.Living
                                 select x).Count();
                 int numFemales = (from x in Population
-                                where x.Gender == Gender.Female && x.Living
-                                select x).Count();
+                                  where x.Gender == Gender.Female && x.Living
+                                  select x).Count();
 
-                Console.WriteLine(string.Format("{0} M: {1} F: {2}", y, numMales, numFemales));
+                MessageBox.Show(string.Format("{0} M: {1} F: {2}", y, numMales, numFemales));
+            }
+        }
+
+        void SimStep(int year, Person p)
+        {
+            if (!p.Living) return;
+
+            int age = year - p.BirthYear;
+
+            double dp = (from x in DeathProbabilities
+                         where x.Age == age
+                             && x.Gender == p.Gender
+                         select x.Probability).FirstOrDefault();
+
+            if (rng.NextDouble() < dp)
+            {
+                p.Living = false;
+                return;
+            }
+
+            if (p.Gender == Gender.Male) return;
+
+            double bp = (from x in BirthProbabilities
+                         where x.Age == age
+                            && x.NumChildren == p.NumChildren
+                         select x.Probability).FirstOrDefault();
+
+            if (rng.NextDouble() < bp)
+            {
+                Person baby = new Person()
+                {
+                    BirthYear = year,
+                    Gender = (Gender)rng.Next(1,3),
+                    NumChildren = 0
+                };
+
+                Population.Add(baby);
             }
         }
 
@@ -115,6 +155,16 @@ namespace MySim
 
             sr.Close();
             return deathPs;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Simulation(numericUpDown1.Value);
         }
     }
 }
