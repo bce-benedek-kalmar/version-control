@@ -18,6 +18,7 @@ namespace MySim
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        Random rng = new Random(1337);
 
         public Form1()
         {
@@ -28,6 +29,23 @@ namespace MySim
             DeathProbabilities = loadDeathPs(@"C:\Temp\halál.csv");
 
             dataGridView1.DataSource = Population;
+
+            for (int y = 2005; y < 2024; y++)
+            {
+                for (int i = 0; i < Population.Count; i++)
+                {
+
+                }
+
+                int numMales = (from x in Population
+                                where x.Gender == Gender.Male && x.Living
+                                select x).Count();
+                int numFemales = (from x in Population
+                                where x.Gender == Gender.Female && x.Living
+                                select x).Count();
+
+                Console.WriteLine(string.Format("{0} M: {1} F: {2}", y, numMales, numFemales));
+            }
         }
 
         List<Person> loadPopulus(string path)
