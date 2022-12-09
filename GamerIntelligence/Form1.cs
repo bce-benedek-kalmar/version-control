@@ -60,6 +60,7 @@ namespace GamerIntelligence
             {
                 championBotGamer = winners.FirstOrDefault().Brain.Clone();
                 gc.GameOver -= Gc_GameOver;
+                button1.Visible = true;
                 return;
             }
 
@@ -85,6 +86,15 @@ namespace GamerIntelligence
         private void Form1_ControlAdded(object sender, ControlEventArgs e)
         {
             label1.BringToFront();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(championBotGamer.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
         }
     }
 }
