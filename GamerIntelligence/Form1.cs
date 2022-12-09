@@ -15,6 +15,7 @@ namespace GamerIntelligence
     {
         GameController gc = new GameController();
         GameArea ga;
+        Brain championBotGamer = null;
 
         int populationSize = 100;
         int nbrOfSteps = 10;
@@ -51,6 +52,17 @@ namespace GamerIntelligence
                              select p;
             var topPerformers = playerList.Take(populationSize / 2).ToList();
 
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+
+            if (winners.Count() > 0)
+            {
+                championBotGamer = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+
             gc.ResetCurrentLevel();
             foreach (var p in topPerformers)
             {
@@ -65,6 +77,8 @@ namespace GamerIntelligence
                 else
                     gc.AddPlayer(b.Mutate());
             }
+
+
             gc.Start();
         }
 
